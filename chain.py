@@ -1,5 +1,6 @@
 from numpy.random import choice
 import probability
+import os
 
 
 def load_file(fp):
@@ -35,20 +36,17 @@ def update_dict(nextwords, curr, nxt):
             nextwords[curr][nxt] = 1
     else:
         nextwords[curr] = {nxt:1}
-
     return nextwords
 
 
 if __name__ == '__main__':
 
-    import os
     dirlist = os.listdir('songs/')
     nextwords={}
 
     for i in range(len(dirlist)):
         text = load_file('songs/'+ dirlist[i])
         nextwords = build_input(nextwords,text)
-
 
     nxt = 'START'
     while nxt != 'END':
