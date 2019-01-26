@@ -41,17 +41,14 @@ def update_dict(nextwords, curr, nxt):
 
 if __name__ == '__main__':
 
-    text = load_file('songs/dontstopbelievin.txt')
-    nextwords = build_input({}, text)
+    import os
+    dirlist = os.listdir('songs/')
+    nextwords={}
 
-    text = load_file('songs/allthesmallthings.txt')
-    nextwords = build_input(nextwords, text)
+    for i in range(len(dirlist)):
+        text = load_file('songs/'+ dirlist[i])
+        nextwords = build_input(nextwords,text)
 
-    text = load_file('songs/stacysmom.txt')
-    nextwords = build_input(nextwords, text)
-
-    text = load_file('songs/freedfromdesire.txt')
-    nextwords = build_input(nextwords, text)
 
     nxt = 'START'
     while nxt != 'END':
