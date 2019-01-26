@@ -1,12 +1,21 @@
+from numpy.random import choice
+import probability
 
 
 def load_file(fp):
-    f = open(fp, "r")
-    return f.read()
+
+    text = 'START \n'
+    with open(fp, "r") as f:
+        for line in f:
+            l = line.strip('\n()')
+            text = text + l + ' \n '
+    text = text + 'END'
+    return text
 
 def build_input(nextwords, text):
-    words = text.split()
-    words = ["START"] + words + ["END"]
+    text = text.replace('(', '')
+    text = text.replace(')', '')
+    words = text.split(' ')
 
     for i in range(len(words)):
         curr = words[i]
@@ -30,14 +39,22 @@ def update_dict(nextwords, curr, nxt):
     return nextwords
 
 
-
-
-
-
 if __name__ == '__main__':
 
-    text = load_file('dont_stop_believin.txt')
-    print(text)
-    print('\n\n')
+    text = load_file('songs/dontstopbelievin.txt')
     nextwords = build_input({}, text)
-    print(nextwords)
+
+    text = load_file('songs/allthesmallthings.txt')
+    nextwords = build_input(nextwords, text)
+
+    text = load_file('songs/stacysmom.txt')
+    nextwords = build_input(nextwords, text)
+
+    text = load_file('songs/freedfromdesire.txt')
+    nextwords = build_input(nextwords, text)
+
+    nxt = 'START'
+    while nxt != 'END':
+        probs = probability.get_percentages(list(nextwords[nxt].values()))
+        nxt = choice(list(nextwords[nxt]), p=probs)
+        print(nxt, end=' ')
