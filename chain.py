@@ -38,7 +38,8 @@ def update_dict(nextwords, curr, nxt):
         nextwords[curr] = {nxt:1}
     return nextwords
 
-def main():
+def make_song():
+    song = ''
     dirlist = os.listdir('songs/')
     nextwords={}
 
@@ -50,8 +51,10 @@ def main():
     while nxt != 'END':
         probs = probability.get_percentages(list(nextwords[nxt].values()))
         nxt = choice(list(nextwords[nxt]), p=probs)
-        print(nxt, end=' ')
+        song = song + ' ' + nxt
+
+    return song
 
 
 if __name__ == '__main__':
-    main()
+    print(make_song())
