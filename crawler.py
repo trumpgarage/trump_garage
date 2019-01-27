@@ -23,7 +23,7 @@ def get_tweets(hashtag):
                                since="2018-12-01").items():
         i+=1 
         #print (tweet.created_at, tweet.text)
-        raw_text = tweet.full_text
+        raw_text = tweet.text
         raw_text = re.sub(r'(\s)@\w+', r'\1', raw_text, 1)
         raw_text = re.sub(r'(\s)https\w+', r'\1', raw_text)
         raw_text = re.sub(r'(\S)https\w+', r'\1', raw_text)
