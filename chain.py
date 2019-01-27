@@ -56,7 +56,7 @@ def make_song():
 
     return song
 
-def make_tweet(hashtag, language):
+def make_tweet(hashtag="#Brexit", language="en"):
     twet = ''
     nextwords = {}
 
