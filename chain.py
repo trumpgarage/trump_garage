@@ -1,6 +1,7 @@
 from numpy.random import choice
 import probability
 import os
+import crawler
 
 
 def load_file(fp):
@@ -55,6 +56,26 @@ def make_song():
 
     return song
 
+def make_tweet(hashtag):
+    twet = ''
+    nextwords = {}
+
+    for t in crawler.get_tweets(hashtag):
+        nextwords = build_input(nextwords, t)
+
+    nxt = 'START'
+    while nxt != 'END':
+        probs = probability.get_percentages(list(nextwords[nxt].values()))
+        nxt = choice(list(nextwords[nxt]), p=probs)
+        twet = twet + ' ' + nxt
+
+    return twet
+
 
 if __name__ == '__main__':
     print(make_song())
+    #print(make_tweet('#KaarisvsBooba'))
+
+
+
+
