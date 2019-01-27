@@ -56,31 +56,32 @@ def make_song():
 
     return song
 
-def make_tweet(hashtag="#Brexit", language="en"):
-    twet = ''
+def make_tweet(hashtag="#KaarisvsBooba", language="fr", num=5):
+    tweets = []
     nextwords = {}
 
     for t in crawler.get_tweets(hashtag, language):
         nextwords = build_input(nextwords, t)
 
-    nxt = 'START'
-    while nxt != 'END':
-        probs = probability.get_percentages(list(nextwords[nxt].values()))
-        nxt = choice(list(nextwords[nxt]), p=probs)
-        twet = twet + ' ' + nxt
+    for i in range(num):
+        twet = ''
+        nxt = 'START'
+        while nxt != 'END':
+            probs = probability.get_percentages(list(nextwords[nxt].values()))
+            nxt = choice(list(nextwords[nxt]), p=probs)
+            twet = twet + ' ' + nxt
+        tweets.append(twet)
 
-    return twet
+    return tweets
 
 
 if __name__ == '__main__':
     #print(make_song())
-    #print(make_tweet('#KaarisvsBooba', "fr"))
-    #print(make_tweet('#KaarisvsBooba', "fr"))
-    #print(make_tweet('#KaarisvsBooba', "fr"))
+    for t in make_tweet('#KaarisvsBooba', "fr", 3):
+        print(t)
 
-    print(make_tweet('#brexit', "en"))
-    print(make_tweet('#brexit', "en"))
-    print(make_tweet('#brexit', "en"))
+    for t in make_tweet('#brexit', "en", 3):
+        print(t)
 
 
 

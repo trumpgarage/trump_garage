@@ -21,18 +21,17 @@ def get_tweets(hashtag, language):
     for tweet in tweepy.Cursor(api.search,q=hashtag,count=10, tweet_mode = 'extended',
                                lang=language,
                                since="2018-12-01").items():
-        i+=1 
-        #print (tweet.created_at, tweet.text)
-        raw_text = tweet.full_text
-        raw_text = re.sub(r'(\s)@\w+', r'\1', raw_text, 1)
-        raw_text = re.sub(r'(\s)https\w+', r'\1', raw_text)
-        raw_text = re.sub(r'(\S)https\w+', r'\1', raw_text)
-        raw_text = re.sub(r'(\s)https\S+', r'\1', raw_text)
-        raw_text = re.sub(r'(\s)RT\w+', ' ', raw_text)    
-        raw_text = re.sub('RT', '', raw_text)
-        raw_text = re.sub(r'(\s):\s+', '', raw_text, 1)
-        tweets.append('START ' + raw_text + ' END')
-        #csvWriter.writerow([ tweet.text.encode('utf-8')])
+        if 'RT @' not in tweet.full_text:
+            i+=1 
+            #print (tweet.created_at, tweet.text)
+            raw_text = tweet.full_text
+            raw_text = re.sub(r'(\s)@\w+', r'\1', raw_text, 1)
+            raw_text = re.sub(r'(\s)https\w+', r'\1', raw_text)
+            raw_text = re.sub(r'(\S)https\w+', r'\1', raw_text)
+            raw_text = re.sub(r'(\s)https\S+', r'\1', raw_text)
+            raw_text = re.sub(r'(\s):\s+', '', raw_text, 1)
+            tweets.append('START ' + raw_text + ' END')
+            #csvWriter.writerow([ tweet.text.encode('utf-8')])
         if i >= 100 :
             break
 

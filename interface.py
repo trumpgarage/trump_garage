@@ -16,8 +16,10 @@ def apress():
 
 
 def addtweet():
-	text.insert(END,"\n\n\n")
-	text.insert(END,chain.make_tweet())
+    text.insert(END,"\n\n\n")
+    tweets = chain.make_tweet()
+    for t in tweets:
+        text.insert(END, t + "\n\n")
 
 
 btn = Button(screen, text = 'Generate song', width = 20, command = apress) 
