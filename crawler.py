@@ -7,7 +7,7 @@ consumer_secret = '60T2JjYzmpCKSfcS5fCQQRnVeSc6TeXNiU655fxdGwIxskuMX3'
 access_token = '1089160091671162881-njrgdezc4foUK8n5AADY0GjF4A2aNC'
 access_token_secret = 'vsJTEeQt04UwISsbb76MCuPZhMKyewuyDPVurayOGJcmh'
 
-def get_tweets(hashtag):
+def get_tweets(hashtag, language):
     tweets = []
     ####input your credentials here
     
@@ -19,7 +19,7 @@ def get_tweets(hashtag):
     i = 0
     re.DOTALL
     for tweet in tweepy.Cursor(api.search,q=hashtag,count=10,
-                               lang="fr",
+                               lang=language,
                                since="2018-12-01").items():
         i+=1 
         #print (tweet.created_at, tweet.text)
@@ -32,7 +32,6 @@ def get_tweets(hashtag):
         raw_text = re.sub('RT', '', raw_text)
         raw_text = re.sub(r'(\s):\s+', '', raw_text, 1)
         tweets.append('START ' + raw_text + ' END')
-        print(raw_text)
         #csvWriter.writerow([ tweet.text.encode('utf-8')])
         if i >= 100 :
             break

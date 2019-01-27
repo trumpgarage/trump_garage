@@ -56,11 +56,11 @@ def make_song():
 
     return song
 
-def make_tweet(hashtag):
+def make_tweet(hashtag, language):
     twet = ''
     nextwords = {}
 
-    for t in crawler.get_tweets(hashtag):
+    for t in crawler.get_tweets(hashtag, language):
         nextwords = build_input(nextwords, t)
 
     nxt = 'START'
@@ -73,9 +73,14 @@ def make_tweet(hashtag):
 
 
 if __name__ == '__main__':
-    print(make_song())
-    #print(make_tweet('#KaarisvsBooba'))
+    #print(make_song())
+    #print(make_tweet('#KaarisvsBooba', "fr"))
+    #print(make_tweet('#KaarisvsBooba', "fr"))
+    #print(make_tweet('#KaarisvsBooba', "fr"))
 
+    print(make_tweet('#brexit', "en"))
+    print(make_tweet('#brexit', "en"))
+    print(make_tweet('#brexit', "en"))
 
 
 
