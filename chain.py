@@ -38,9 +38,7 @@ def update_dict(nextwords, curr, nxt):
         nextwords[curr] = {nxt:1}
     return nextwords
 
-
-if __name__ == '__main__':
-
+def main():
     dirlist = os.listdir('songs/')
     nextwords={}
 
@@ -53,3 +51,7 @@ if __name__ == '__main__':
         probs = probability.get_percentages(list(nextwords[nxt].values()))
         nxt = choice(list(nextwords[nxt]), p=probs)
         print(nxt, end=' ')
+
+
+if __name__ == '__main__':
+    main()
